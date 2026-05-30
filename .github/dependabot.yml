@@ -1,11 +1,12 @@
 version: 2
 updates:
+  # Track our fork-local CI infra (workflow action SHAs).
+  # We do NOT track cargo dependencies: this fork follows upstream
+  # birkenfeld/arexibo for source code, and Cargo.toml / Cargo.lock
+  # are upstream's territory — re-bumping crates here just diverges us
+  # from upstream for no benefit. Crate bumps replay automatically the
+  # next time we rebase on upstream.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "cargo"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
