@@ -24,7 +24,7 @@ clap_lex = { version = "<1.1" }
 crossbeam-channel = "0.5"
 parking_lot = "0.12"
 hex = "0.4"
-itertools = "0.14"
+itertools = "0.15"
 log = "0.4"
 nix = { version = "0.31", features = ["fs", "hostname"] }
 rand = "0.8"
