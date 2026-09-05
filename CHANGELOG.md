@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 - Sep 2026
+
+- First packaged 0.4.x release; v0.4.0 was tagged but no RPM/DEB was ever built.
+- Semver-compatible crate refresh (`cargo update`).
+- RPMs built for Fedora 43 and 44.
+
 ## 0.4.0 - Apr 2026
 
 - Prevent path traversal in embedded webserver.

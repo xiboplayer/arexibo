@@ -21,6 +21,6 @@ jobs:
       arch-matrix: '["x86_64", "aarch64"]'
       source-tarball: 'full'
       gpg-sign: true
-      default-version: '0.3.3'
+      default-version: '0.4.1'
       publish-to-repo: true
     secrets: inherit

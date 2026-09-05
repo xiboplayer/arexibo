@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           arexibo
-Version:        0.3.3
-Release:        3%{?dist}
+Version:        0.4.1
+Release:        1%{?dist}
 Summary:        Rust-based digital signage player for Xibo CMS
 
 License:        AGPLv3+
@@ -50,6 +50,11 @@ install -Dm644 arexibo.service %{buildroot}%{_userunitdir}/arexibo.service
 %{_datadir}/icons/hicolor/scalable/apps/arexibo.svg
 
 %changelog
+* Fri Sep 05 2026 Pau Aliagas <pau@xiboplayer.org> - 0.4.1-1
+- First packaged 0.4.x build (v0.4.0 was tagged 2026-04-20 but never built)
+- Crate refresh (cargo update, semver-compatible)
+- Fedora 43 and 44 packages
+
 * Thu Apr 02 2026 Pau Aliagas <linuxnow@gmail.com> - 0.3.3-3
 - Add arexibo.service systemd user unit
 - Add unit tests for config and util modules
