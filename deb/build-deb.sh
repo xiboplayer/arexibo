@@ -22,6 +22,33 @@ ARCH=$(dpkg --print-architecture)
 echo "Building arexibo ${BASE_VERSION}-${RELEASE} for ${ARCH}"
 
 # Build Rust binary
+#
+# rust-toolchain.toml pins the "stable" channel, but a distro cargo ignores
+# it: Ubuntu 24.04 ships 1.75, and transitive dependencies now need the 2024
+# edition (stable since 1.85). Bootstrap rustup when the available cargo is
+# older than that, so every builder tracks the same channel the RPM build and
+# `cargo test` already use. Debian trixie (1.85) and Fedora are left alone.
+MIN_CARGO_MINOR=85
+
+cargo_too_old() {
+  command -v cargo >/dev/null 2>&1 || return 0
+  local version major minor
+  version=$(cargo --version | awk '{print $2}')
+  major=${version%%.*}
+  minor=$(echo "$version" | cut -d. -f2)
+  [ "$major" -eq 1 ] && [ "$minor" -lt "$MIN_CARGO_MINOR" ]
+}
+
+if cargo_too_old; then
+  echo "==> cargo $(cargo --version 2>/dev/null | awk '{print $2}' || echo missing) predates the 2024 edition; installing the stable toolchain via rustup"
+  export RUSTUP_HOME="${RUSTUP_HOME:-${PWD}/.rustup}"
+  export CARGO_HOME="${CARGO_HOME:-${PWD}/.cargo}"
+  curl --proto '=https' --tlsv1.2 --retry 5 --retry-connrefused -sSf https://sh.rustup.rs \
+    | sh -s -- -y --no-modify-path --profile minimal --default-toolchain stable
+  export PATH="${CARGO_HOME}/bin:${PATH}"
+fi
+
+echo "==> building with $(cargo --version)"
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 cargo build --release
 
