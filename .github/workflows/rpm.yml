@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    uses: xiboplayer/.github/.github/workflows/build-rpm.yml@9af382cf12830bca426a1a99e4b59532ee72a711  # main
+    uses: xiboplayer/.github/.github/workflows/build-rpm.yml@e8649f4861f729365d7f15c9f5715f5df64dc2c7  # main
     with:
       package-name: arexibo
       rpm-spec: 'rpm/arexibo.spec'
