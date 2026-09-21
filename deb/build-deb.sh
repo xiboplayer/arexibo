@@ -27,8 +27,17 @@ echo "Building arexibo ${BASE_VERSION}-${RELEASE} for ${ARCH}"
 # it: Ubuntu 24.04 ships 1.75, and transitive dependencies now need the 2024
 # edition (stable since 1.85). Bootstrap rustup when the available cargo is
 # older than that, so every builder tracks the same channel the RPM build and
-# `cargo test` already use. Debian trixie (1.85) and Fedora are left alone.
-MIN_CARGO_MINOR=85
+# `cargo test` already use.
+#
+# Debian trixie shipped 1.85, which used to clear this bar — until the
+# 2026-09-06 Dependabot cargo bump (PR #93) pulled in time@0.3.47, whose MSRV
+# is 1.88. trixie's system rustc doesn't build it: "error: rustc 1.85.1 is
+# not supported by the following packages: time@0.3.47 requires rustc
+# 1.88.0". Raise the floor so trixie also gets the rustup-installed stable
+# toolchain instead of drifting out of sync with whatever MSRV Dependabot's
+# next bump needs. Fedora is still left alone (system rustc tracks current
+# stable closely enough not to fall behind crates.io).
+MIN_CARGO_MINOR=88
 
 cargo_too_old() {
   command -v cargo >/dev/null 2>&1 || return 0
