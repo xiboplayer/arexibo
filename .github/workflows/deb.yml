@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    uses: xiboplayer/.github/.github/workflows/build-deb.yml@86264d87f5dd3758fddd9dcc60bbf963213d312f  # main
+    uses: xiboplayer/.github/.github/workflows/build-deb.yml@2f9f0f369ade9accb7afb1577a61d5a38e2883fc  # main
     with:
       package-name: arexibo
       deb-script: 'deb/build-deb.sh'
