@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2 - Nov 2026
+
+- Packaging-only release: RPMs built for Fedora 44 and 45.
+
 ## 0.4.1 - Sep 2026
 
 - First packaged 0.4.x release; v0.4.0 was tagged but no RPM/DEB was ever built.
